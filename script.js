@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const questionElement = document.getElementById("question");
-    const buttons = document.querySelectorAll(".answer-button");
+    const buttons = Array.from(document.querySelectorAll(".answer-button"));
     const messageElement = document.getElementById("message");
     let correctAnswer;
 
@@ -18,9 +18,9 @@ document.addEventListener("DOMContentLoaded", function () {
             correctAnswer - Math.floor(Math.random() * 10) - 1,
             correctAnswer + Math.floor(Math.random() * 20) + 11
         ];
-        
+
         answers = answers.sort(() => Math.random() - 0.5);
-        
+
         buttons.forEach((button, index) => {
             button.textContent = answers[index];
             button.onclick = function () {
