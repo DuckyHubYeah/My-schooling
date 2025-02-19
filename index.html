@@ -12,20 +12,36 @@
             margin: 50px;
         }
         .answer-button {
-            display: block;
-            margin: 10px auto;
+            display: inline-block;
+            margin: 10px;
             padding: 10px;
             font-size: 18px;
             cursor: pointer;
+            width: 100px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        #message {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
     <h1>Times Table Game</h1>
     <p id="question"></p>
-    <button class="answer-button"></button>
-    <button class="answer-button"></button>
-    <button class="answer-button"></button>
-    <button class="answer-button"></button>
+    <div class="button-container">
+        <button class="answer-button"></button>
+        <button class="answer-button"></button>
+    </div>
+    <div class="button-container">
+        <button class="answer-button"></button>
+        <button class="answer-button"></button>
+    </div>
+    <p id="message"></p>
 </body>
 </html>
