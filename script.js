@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const questionElement = document.getElementById("question");
     const buttons = document.querySelectorAll(".answer-button");
+    const messageElement = document.getElementById("message");
     let correctAnswer;
 
     function generateQuestion() {
@@ -8,6 +9,8 @@ document.addEventListener("DOMContentLoaded", function () {
         let num2 = Math.floor(Math.random() * 12) + 1;
         correctAnswer = num1 * num2;
         questionElement.textContent = `${num1} × ${num2} = ?`;
+        messageElement.textContent = "";
+        messageElement.style.color = "black";
 
         let answers = [
             correctAnswer,
@@ -28,10 +31,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function checkAnswer(selected) {
         if (selected === correctAnswer) {
-            alert("Correct! Well done!");
-            generateQuestion();
+            messageElement.textContent = "Correct! Well done!";
+            messageElement.style.color = "green";
+            setTimeout(generateQuestion, 1000);
         } else {
-            alert("Wrong! Try again.");
+            messageElement.textContent = "Wrong! Try again.";
+            messageElement.style.color = "red";
         }
     }
 
