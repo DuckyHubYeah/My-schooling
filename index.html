@@ -4,44 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Times Table Game</title>
+    <link rel="stylesheet" href="./style.css">
     <script defer src="./script.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px;
-        }
-        .answer-button {
-            display: inline-block;
-            margin: 10px;
-            padding: 10px;
-            font-size: 18px;
-            cursor: pointer;
-            width: 100px;
-        }
-        .button-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        #message {
-            font-size: 20px;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-    </style>
 </head>
 <body>
-    <h1>Times Table Game</h1>
-    <p id="question"></p>
-    <div class="button-container">
-        <button class="answer-button"></button>
-        <button class="answer-button"></button>
+    <div class="container">
+        <h1>Times Table Game</h1>
+
+        <!-- Mode Selection -->
+        <div id="mode-selection">
+            <button class="mode-button" data-mode="easy">Easy</button>
+            <button class="mode-button" data-mode="medium">Medium</button>
+            <button class="mode-button" data-mode="hard">Hard</button>
+            <button class="mode-button" data-mode="all">All</button>
+        </div>
+
+        <!-- Game Question -->
+        <p id="question">Press a mode to start!</p>
+
+        <!-- Answer Choices -->
+        <div class="button-container">
+            <button class="answer-button"></button>
+            <button class="answer-button"></button>
+        </div>
+        <div class="button-container">
+            <button class="answer-button"></button>
+            <button class="answer-button"></button>
+        </div>
+
+        <!-- Message Display -->
+        <p id="message"></p>
     </div>
-    <div class="button-container">
-        <button class="answer-button"></button>
-        <button class="answer-button"></button>
-    </div>
-    <p id="message"></p>
 </body>
 </html>
