@@ -3,36 +3,34 @@ body {
     text-align: center;
     margin: 50px;
     background-color: #b3e5fc;
-    display: flex;
-    justify-content: space-between;
 }
 
 .container {
-    flex: 1;
     text-align: center;
 }
 
 .button-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
-.answer-button, .mode-button, .operation-button {
+.answer-button {
+    display: inline-block;
     margin: 10px;
-    padding: 15px;
+    padding: 10px;
     font-size: 18px;
     cursor: pointer;
-    width: 150px;
-    background: #ff9800;
-    border: none;
-    border-radius: 10px;
-    color: white;
+    width: 100px;
 }
 
-.answer-button:hover, .mode-button:hover, .operation-button:hover {
-    background: #f57c00;
+.mode-button, .operation-button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 120px;
 }
 
 #message {
@@ -43,18 +41,3 @@ body {
 
 .correct { color: green; }
 .wrong { color: red; }
-
-.left-panel, .right-panel {
-    width: 150px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.right-panel {
-    margin-right: 20px;
-}
-
-.left-panel {
-    margin-left: 20px;
-}
