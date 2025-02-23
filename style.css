@@ -27,6 +27,11 @@ body {
     font-size: 18px;
     cursor: pointer;
     width: 100px;
+    background-color: #ff9800; /* Orange color */
+    color: white;
+    border: none;
+    border-radius: 20px; /* Makes buttons curved */
+    transition: background 0.3s ease;
 }
 
 /* Panels for left and right sides */
@@ -61,6 +66,16 @@ body {
     font-size: 16px;
     cursor: pointer;
     width: 120px;
+    background-color: #ff9800; /* Orange color */
+    color: white;
+    border: none;
+    border-radius: 20px; /* Makes buttons curved */
+    transition: background 0.3s ease;
+}
+
+/* Hover effect for buttons */
+.mode-button:hover, .operation-button:hover, .answer-button:hover {
+    background-color: #e68900; /* Slightly darker orange */
 }
 
 #message {
