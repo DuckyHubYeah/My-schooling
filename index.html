@@ -3,26 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Times Table Game</title>
-    <link rel="stylesheet" href="./style.css">
+    <title>Math Game</title>
     <script defer src="./script.js"></script>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+    <div class="left-panel">
+        <button class="mode-button" data-mode="easy">Easy</button>
+        <button class="mode-button" data-mode="medium">Medium</button>
+        <button class="mode-button" data-mode="hard">Hard</button>
+        <button class="mode-button" data-mode="all">All</button>
+    </div>
+
     <div class="container">
-        <h1>Times Table Game</h1>
-
-        <!-- Mode Selection -->
-        <div id="mode-selection">
-            <button class="mode-button" data-mode="easy">Easy</button>
-            <button class="mode-button" data-mode="medium">Medium</button>
-            <button class="mode-button" data-mode="hard">Hard</button>
-            <button class="mode-button" data-mode="all">All</button>
-        </div>
-
-        <!-- Game Question -->
-        <p id="question">Press a mode to start!</p>
-
-        <!-- Answer Choices -->
+        <h1>Math Game</h1>
+        <p id="question"></p>
         <div class="button-container">
             <button class="answer-button"></button>
             <button class="answer-button"></button>
@@ -31,9 +26,14 @@
             <button class="answer-button"></button>
             <button class="answer-button"></button>
         </div>
-
-        <!-- Message Display -->
         <p id="message"></p>
+    </div>
+
+    <div class="right-panel">
+        <button class="operation-button" data-operation="addition">Addition</button>
+        <button class="operation-button" data-operation="subtraction">Subtraction</button>
+        <button class="operation-button" data-operation="multiplication">Multiplication</button>
+        <button class="operation-button" data-operation="division">Division</button>
     </div>
 </body>
 </html>
