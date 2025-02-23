@@ -3,10 +3,15 @@ body {
     text-align: center;
     margin: 50px;
     background-color: #b3e5fc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .container {
     text-align: center;
+    flex: 2;
 }
 
 .button-container {
@@ -22,6 +27,31 @@ body {
     font-size: 18px;
     cursor: pointer;
     width: 100px;
+}
+
+/* Panels for left and right sides */
+.left-panel, .right-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150px;
+    padding: 10px;
+}
+
+/* Left side - Difficulty buttons */
+.left-panel {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Right side - Operation buttons */
+.right-panel {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .mode-button, .operation-button {
@@ -40,4 +70,4 @@ body {
 }
 
 .correct { color: green; }
-.wrong { color: red; }
+.wrong { color: red; } 
