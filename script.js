@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function generateQuestion() {
         let num1, num2;
         
+        // Apply difficulty settings for numbers
         switch (mode) {
             case "easy":
                 num1 = getRandomInt(1, 4);
@@ -36,6 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 break;
         }
 
+        // Apply the selected operation
         switch (operation) {
             case "addition":
                 currentAnswer = num1 + num2;
@@ -46,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 questionElement.textContent = `${num1} - ${num2} = ?`;
                 break;
             case "division":
-                num1 = num1 * num2;
+                num1 = num1 * num2; // Make sure the numbers are divisible
                 currentAnswer = num1 / num2;
                 questionElement.textContent = `${num1} ÷ ${num2} = ?`;
                 break;
@@ -57,6 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 break;
         }
 
+        // Reset the message and create answer options
         messageElement.textContent = "";
         let answers = new Set();
         answers.add(currentAnswer);
@@ -75,6 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Check if the selected answer is correct
     function checkAnswer(selectedAnswer, button) {
         if (selectedAnswer === currentAnswer) {
             messageElement.textContent = "Correct!";
@@ -88,19 +92,22 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // Event listener for difficulty buttons
     modeButtons.forEach(button => {
         button.addEventListener("click", () => {
             mode = button.getAttribute("data-mode");
-            generateQuestion();
+            generateQuestion(); // Regenerate the question with the new mode
         });
     });
 
+    // Event listener for operation buttons
     operationButtons.forEach(button => {
         button.addEventListener("click", () => {
             operation = button.getAttribute("data-operation");
-            generateQuestion();
+            generateQuestion(); // Regenerate the question with the selected operation
         });
     });
 
+    // Initialize the first question
     generateQuestion();
 });
