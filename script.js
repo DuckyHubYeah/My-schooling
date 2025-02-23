@@ -16,28 +16,26 @@ document.addEventListener("DOMContentLoaded", () => {
     function generateQuestion() {
         let num1, num2;
         
-        // Apply difficulty settings for numbers
         switch (mode) {
             case "easy":
-                num1 = getRandomInt(1, 4);
-                num2 = getRandomInt(1, 4);
+                num1 = getRandomInt(1, 10);
+                num2 = getRandomInt(1, 10);
                 break;
             case "medium":
-                num1 = getRandomInt(5, 8);
-                num2 = getRandomInt(5, 8);
+                num1 = getRandomInt(10, 50);  // Harder numbers
+                num2 = getRandomInt(10, 50);
                 break;
             case "hard":
-                num1 = getRandomInt(9, 12);
-                num2 = getRandomInt(9, 12);
+                num1 = getRandomInt(50, 100);  // Very hard numbers
+                num2 = getRandomInt(50, 100);
                 break;
             case "all":
             default:
-                num1 = getRandomInt(1, 12);
-                num2 = getRandomInt(1, 12);
+                num1 = getRandomInt(1, 100); // Full range
+                num2 = getRandomInt(1, 100);
                 break;
         }
 
-        // Apply the selected operation
         switch (operation) {
             case "addition":
                 currentAnswer = num1 + num2;
@@ -48,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 questionElement.textContent = `${num1} - ${num2} = ?`;
                 break;
             case "division":
-                num1 = num1 * num2; // Make sure the numbers are divisible
+                num1 = num1 * num2; // Ensure num1 is divisible by num2
                 currentAnswer = num1 / num2;
                 questionElement.textContent = `${num1} ÷ ${num2} = ?`;
                 break;
@@ -59,12 +57,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 break;
         }
 
-        // Reset the message and create answer options
         messageElement.textContent = "";
         let answers = new Set();
         answers.add(currentAnswer);
         while (answers.size < 4) {
-            let fakeAnswer = getRandomInt(1, 144);
+            let fakeAnswer = getRandomInt(1, 10000); // Increased range for fake answers
             if (fakeAnswer !== currentAnswer) {
                 answers.add(fakeAnswer);
             }
@@ -78,7 +75,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Check if the selected answer is correct
     function checkAnswer(selectedAnswer, button) {
         if (selectedAnswer === currentAnswer) {
             messageElement.textContent = "Correct!";
@@ -92,22 +88,19 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Event listener for difficulty buttons
     modeButtons.forEach(button => {
         button.addEventListener("click", () => {
             mode = button.getAttribute("data-mode");
-            generateQuestion(); // Regenerate the question with the new mode
+            generateQuestion();
         });
     });
 
-    // Event listener for operation buttons
     operationButtons.forEach(button => {
         button.addEventListener("click", () => {
             operation = button.getAttribute("data-operation");
-            generateQuestion(); // Regenerate the question with the selected operation
+            generateQuestion();
         });
     });
 
-    // Initialize the first question
     generateQuestion();
 });
