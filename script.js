@@ -1,44 +1,78 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
     const questionElement = document.getElementById("question");
-    const buttons = Array.from(document.querySelectorAll(".answer-button"));
     const messageElement = document.getElementById("message");
-    let correctAnswer;
+    const answerButtons = document.querySelectorAll(".answer-button");
+    const modeButtons = document.querySelectorAll(".mode-button");
+
+    let currentAnswer = 0;
+    let mode = "easy"; // Default mode
+
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 
     function generateQuestion() {
-        let num1 = Math.floor(Math.random() * 12) + 1;
-        let num2 = Math.floor(Math.random() * 12) + 1;
-        correctAnswer = num1 * num2;
-        questionElement.textContent = `${num1} × ${num2} = ?`;
-        messageElement.textContent = "";
-        messageElement.style.color = "black";
+        let multiplicand, multiplier;
+        
+        switch (mode) {
+            case "easy":
+                multiplicand = getRandomInt(1, 4);
+                break;
+            case "medium":
+                multiplicand = getRandomInt(5, 8);
+                break;
+            case "hard":
+                multiplicand = getRandomInt(9, 12);
+                break;
+            case "all":
+            default:
+                multiplicand = getRandomInt(1, 12);
+                break;
+        }
 
-        let answers = [
-            correctAnswer,
-            correctAnswer + Math.floor(Math.random() * 10) + 1,
-            correctAnswer - Math.floor(Math.random() * 10) - 1,
-            correctAnswer + Math.floor(Math.random() * 20) + 11
-        ];
+        multiplier = getRandomInt(1, 12);
+        currentAnswer = multiplicand * multiplier;
+        
+        questionElement.textContent = `${multiplicand} × ${multiplier} = ?`;
 
-        answers = answers.sort(() => Math.random() - 0.5);
+        // Generate four answer choices
+        let answers = new Set();
+        answers.add(currentAnswer);
 
-        buttons.forEach((button, index) => {
-            button.textContent = answers[index];
-            button.onclick = function () {
-                checkAnswer(answers[index]);
-            };
+        while (answers.size < 4) {
+            let fakeAnswer = getRandomInt(1, 144); // Ensure the range covers all possible products
+            if (fakeAnswer !== currentAnswer) {
+                answers.add(fakeAnswer);
+            }
+        }
+
+        // Shuffle and set button values
+        let shuffledAnswers = [...answers].sort(() => Math.random() - 0.5);
+        answerButtons.forEach((button, index) => {
+            button.textContent = shuffledAnswers[index];
+            button.onclick = () => checkAnswer(parseInt(button.textContent));
         });
     }
 
-    function checkAnswer(selected) {
-        if (selected === correctAnswer) {
-            messageElement.textContent = "Correct! Well done!";
-            messageElement.style.color = "green";
-            setTimeout(generateQuestion, 1000);
+    function checkAnswer(selectedAnswer) {
+        if (selectedAnswer === currentAnswer) {
+            messageElement.textContent = "Correct!";
+            messageElement.className = "correct";
         } else {
             messageElement.textContent = "Wrong! Try again.";
-            messageElement.style.color = "red";
+            messageElement.className = "wrong";
         }
+        setTimeout(generateQuestion, 1000); // Generate a new question after a second
     }
 
+    // Mode Selection
+    modeButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            mode = button.getAttribute("data-mode");
+            generateQuestion();
+        });
+    });
+
+    // Start with a question
     generateQuestion();
 });
