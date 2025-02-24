@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+=document.addEventListener("DOMContentLoaded", () => {
     const questionElement = document.getElementById("question");
     const messageElement = document.getElementById("message");
     const answerButtons = document.querySelectorAll(".answer-button");
@@ -18,21 +18,21 @@ document.addEventListener("DOMContentLoaded", () => {
         
         switch (mode) {
             case "easy":
-                num1 = getRandomInt(1, 10);
-                num2 = getRandomInt(1, 10);
+                num1 = getRandomInt(1, 4);
+                num2 = getRandomInt(1, 4);
                 break;
             case "medium":
-                num1 = getRandomInt(10, 50);  // Harder numbers
-                num2 = getRandomInt(10, 50);
+                num1 = getRandomInt(5, 8);
+                num2 = getRandomInt(5, 8);
                 break;
             case "hard":
-                num1 = getRandomInt(50, 100);  // Very hard numbers
-                num2 = getRandomInt(50, 100);
+                num1 = getRandomInt(9, 12);
+                num2 = getRandomInt(9, 12);
                 break;
             case "all":
             default:
-                num1 = getRandomInt(1, 100); // Full range
-                num2 = getRandomInt(1, 100);
+                num1 = getRandomInt(1, 12);
+                num2 = getRandomInt(1, 12);
                 break;
         }
 
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 questionElement.textContent = `${num1} - ${num2} = ?`;
                 break;
             case "division":
-                num1 = num1 * num2; // Ensure num1 is divisible by num2
+                num1 = num1 * num2;
                 currentAnswer = num1 / num2;
                 questionElement.textContent = `${num1} ÷ ${num2} = ?`;
                 break;
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let answers = new Set();
         answers.add(currentAnswer);
         while (answers.size < 4) {
-            let fakeAnswer = getRandomInt(1, 10000); // Increased range for fake answers
+            let fakeAnswer = getRandomInt(1, 144);
             if (fakeAnswer !== currentAnswer) {
                 answers.add(fakeAnswer);
             }
