@@ -6,12 +6,37 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    align-items: flex-start;
-    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-/* Container for the Game */
-.container {
+/* Left Panel - Mode Selection */
+.left-panel {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Adds space between buttons */
+}
+
+/* Right Panel - Operation Selection */
+.right-panel {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Adds space between buttons */
+}
+
+/* Main Game Container */
+.game-container {
     background: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
     padding: 20px;
     border-radius: 15px;
@@ -19,7 +44,6 @@ body {
     text-align: center;
     width: 80%;
     max-width: 500px;
-    margin: 20px auto;
 }
 
 /* Heading */
@@ -28,30 +52,21 @@ h1 {
     color: #61dafb; /* Light Blue */
 }
 
-/* Mode Selection (Left-Aligned) */
-#mode-selection {
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-}
-
+/* Buttons Styling */
 .mode-button, .operation-button {
     background: #2196f3; /* Blue */
     border: none;
     color: white;
-    font-size: 1.5em;
-    margin: 10px 0;
-    padding: 15px 30px;
+    font-size: 1.2em;
+    padding: 12px 25px;
     border-radius: 10px;
     cursor: pointer;
     transition: background 0.3s;
     width: 150px;
+    text-align: center;
 }
 
-.mode-button:hover {
+.mode-button:hover, .operation-button:hover {
     background: #1976d2;
 }
 
@@ -61,10 +76,11 @@ h1 {
     margin: 20px 0;
 }
 
-/* Answer Buttons (Larger) */
+/* Answer Buttons */
 .button-container {
     display: flex;
     justify-content: center;
+    gap: 15px;
     margin: 10px 0;
 }
 
@@ -72,14 +88,12 @@ h1 {
     background: #ff9800; /* Orange */
     border: none;
     color: white;
-    font-size: 2em;
-    margin: 10px;
-    padding: 25px 40px;
+    font-size: 1.5em;
+    padding: 20px 30px;
     border-radius: 10px;
     cursor: pointer;
     transition: background 0.3s;
-    width: 180px;
-    display: block; /* Ensures buttons take full width */
+    width: 120px;
 }
 
 .answer-button:hover {
@@ -88,7 +102,7 @@ h1 {
 
 /* Message */
 #message {
-    font-size: 1.5em;
+    font-size: 1.2em;
     font-weight: bold;
     margin: 20px;
 }
@@ -100,15 +114,4 @@ h1 {
 
 .wrong {
     color: #FF5252; /* Red */
-}
-
-.left-panel {
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column; /* Stack buttons vertically */
-    align-items: center; /* Center-align buttons */
-    gap: 10px; /* Add spacing between buttons */
 }
