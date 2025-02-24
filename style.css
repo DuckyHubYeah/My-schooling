@@ -6,38 +6,22 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
+    align-items: center;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    gap: 20px;
 }
 
-/* Left Panel - Mode Selection */
-.left-panel {
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
+/* Left & Right Panels */
+.left-panel, .right-panel {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 15px; /* Adds space between buttons */
+    gap: 10px;
 }
 
-/* Right Panel - Operation Selection */
-.right-panel {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px; /* Adds space between buttons */
-}
-
-/* Main Game Container */
-.game-container {
-    background: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+/* Game Container */
+.container {
+    background: rgba(0, 0, 0, 0.7);
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
@@ -49,16 +33,16 @@ body {
 /* Heading */
 h1 {
     font-size: 2.5em;
-    color: #61dafb; /* Light Blue */
+    color: #61dafb;
 }
 
-/* Buttons Styling */
+/* Mode & Operation Buttons */
 .mode-button, .operation-button {
-    background: #2196f3; /* Blue */
+    background: #2196f3;
     border: none;
     color: white;
     font-size: 1.2em;
-    padding: 12px 25px;
+    padding: 10px 20px;
     border-radius: 10px;
     cursor: pointer;
     transition: background 0.3s;
@@ -68,6 +52,13 @@ h1 {
 
 .mode-button:hover, .operation-button:hover {
     background: #1976d2;
+}
+
+/* Highlight Selected Mode & Operation */
+.selected {
+    background: #ff9800 !important; /* Orange color for selected buttons */
+    color: #000; /* Black text for contrast */
+    font-weight: bold;
 }
 
 /* Question */
@@ -80,16 +71,16 @@ h1 {
 .button-container {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 10px;
     margin: 10px 0;
 }
 
 .answer-button {
-    background: #ff9800; /* Orange */
+    background: #ff9800;
     border: none;
     color: white;
     font-size: 1.5em;
-    padding: 20px 30px;
+    padding: 15px 30px;
     border-radius: 10px;
     cursor: pointer;
     transition: background 0.3s;
@@ -100,18 +91,23 @@ h1 {
     background: #e68900;
 }
 
+.answer-button.disabled {
+    background: #555; /* Grey out incorrect answers */
+    cursor: not-allowed;
+}
+
 /* Message */
 #message {
-    font-size: 1.2em;
+    font-size: 1.5em;
     font-weight: bold;
     margin: 20px;
 }
 
 /* Correct and Wrong Answer Colors */
 .correct {
-    color: #4CAF50; /* Green */
+    color: #4CAF50;
 }
 
 .wrong {
-    color: #FF5252; /* Red */
+    color: #FF5252;
 }
