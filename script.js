@@ -1,106 +1,102 @@
-=document.addEventListener("DOMContentLoaded", () => {
-    const questionElement = document.getElementById("question");
-    const messageElement = document.getElementById("message");
-    const answerButtons = document.querySelectorAll(".answer-button");
-    const modeButtons = document.querySelectorAll(".mode-button");
-    const operationButtons = document.querySelectorAll(".operation-button");
+/* General Styling */
+body {
+    background: linear-gradient(135deg, #4b6cb7, #182848); /* Blue Gradient */
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: flex-start;
+    min-height: 100vh;
+}
 
-    let currentAnswer = 0;
-    let mode = "easy";
-    let operation = "multiplication";
+/* Container for the Game */
+.container {
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 80%;
+    max-width: 500px;
+    margin: 20px auto;
+}
 
-    function getRandomInt(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
+/* Heading */
+h1 {
+    font-size: 2.5em;
+    color: #61dafb; /* Light Blue */
+}
 
-    function generateQuestion() {
-        let num1, num2;
-        
-        switch (mode) {
-            case "easy":
-                num1 = getRandomInt(1, 4);
-                num2 = getRandomInt(1, 4);
-                break;
-            case "medium":
-                num1 = getRandomInt(5, 8);
-                num2 = getRandomInt(5, 8);
-                break;
-            case "hard":
-                num1 = getRandomInt(9, 12);
-                num2 = getRandomInt(9, 12);
-                break;
-            case "all":
-            default:
-                num1 = getRandomInt(1, 12);
-                num2 = getRandomInt(1, 12);
-                break;
-        }
+/* Mode Selection (Left-Aligned) */
+#mode-selection {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+}
 
-        switch (operation) {
-            case "addition":
-                currentAnswer = num1 + num2;
-                questionElement.textContent = `${num1} + ${num2} = ?`;
-                break;
-            case "subtraction":
-                currentAnswer = num1 - num2;
-                questionElement.textContent = `${num1} - ${num2} = ?`;
-                break;
-            case "division":
-                num1 = num1 * num2;
-                currentAnswer = num1 / num2;
-                questionElement.textContent = `${num1} ÷ ${num2} = ?`;
-                break;
-            case "multiplication":
-            default:
-                currentAnswer = num1 * num2;
-                questionElement.textContent = `${num1} × ${num2} = ?`;
-                break;
-        }
+.mode-button {
+    background: #2196f3; /* Blue */
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    margin: 10px 0;
+    padding: 15px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: 150px;
+}
 
-        messageElement.textContent = "";
-        let answers = new Set();
-        answers.add(currentAnswer);
-        while (answers.size < 4) {
-            let fakeAnswer = getRandomInt(1, 144);
-            if (fakeAnswer !== currentAnswer) {
-                answers.add(fakeAnswer);
-            }
-        }
+.mode-button:hover {
+    background: #1976d2;
+}
 
-        let shuffledAnswers = [...answers].sort(() => Math.random() - 0.5);
-        answerButtons.forEach((button, index) => {
-            button.textContent = shuffledAnswers[index];
-            button.style.background = "#ff9800";
-            button.onclick = () => checkAnswer(parseInt(button.textContent), button);
-        });
-    }
+/* Question */
+#question {
+    font-size: 2em;
+    margin: 20px 0;
+}
 
-    function checkAnswer(selectedAnswer, button) {
-        if (selectedAnswer === currentAnswer) {
-            messageElement.textContent = "Correct!";
-            messageElement.className = "correct";
-            setTimeout(generateQuestion, 1000);
-        } else {
-            messageElement.textContent = "Wrong! Try again.";
-            messageElement.className = "wrong";
-            button.style.background = "#FF5252";
-            setTimeout(() => button.style.background = "#ff9800", 500);
-        }
-    }
+/* Answer Buttons (Larger) */
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
 
-    modeButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            mode = button.getAttribute("data-mode");
-            generateQuestion();
-        });
-    });
+.answer-button {
+    background: #ff9800; /* Orange */
+    border: none;
+    color: white;
+    font-size: 2em;
+    margin: 10px;
+    padding: 25px 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: 180px;
+}
 
-    operationButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            operation = button.getAttribute("data-operation");
-            generateQuestion();
-        });
-    });
+.answer-button:hover {
+    background: #e68900;
+}
 
-    generateQuestion();
-});
+/* Message */
+#message {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 20px;
+}
+
+/* Correct and Wrong Answer Colors */
+.correct {
+    color: #4CAF50; /* Green */
+}
+
+.wrong {
+    color: #FF5252; /* Red */
+}
