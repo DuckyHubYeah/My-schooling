@@ -38,7 +38,7 @@ h1 {
     flex-direction: column;
 }
 
-.mode-button {
+.mode-button, .operation-button {
     background: #2196f3; /* Blue */
     border: none;
     color: white;
