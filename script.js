@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const operationButtons = document.querySelectorAll(".operation-button");
 
     let currentAnswer = 0;
-    let mode = "easy"; // Default difficulty level
+    let mode = "easy"; // Default mode
     let operation = "multiplication"; // Default operation
 
     function getRandomInt(min, max) {
@@ -73,19 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
         answers.add(currentAnswer);
 
         while (answers.size < 4) {
-            let fakeAnswer;
-            switch (selectedOperation) {
-                case "addition":
-                case "subtraction":
-                    fakeAnswer = getRandomInt(currentAnswer - 10, currentAnswer + 10);
-                    break;
-                case "multiplication":
-                    fakeAnswer = getRandomInt(1, 144);
-                    break;
-                case "division":
-                    fakeAnswer = getRandomInt(1, 12);
-                    break;
-            }
+            let fakeAnswer = getRandomInt(currentAnswer - 10, currentAnswer + 10);
             if (fakeAnswer !== currentAnswer && fakeAnswer > 0) {
                 answers.add(fakeAnswer);
             }
@@ -114,23 +102,37 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    function updateSelectedButton(buttons, selectedValue) {
+        buttons.forEach(button => {
+            if (button.getAttribute("data-mode") === selectedValue || button.getAttribute("data-operation") === selectedValue) {
+                button.classList.add("selected");
+            } else {
+                button.classList.remove("selected");
+            }
+        });
+    }
+
     // Mode Selection Buttons
     modeButtons.forEach(button => {
         button.addEventListener("click", () => {
             mode = button.getAttribute("data-mode");
-            console.log("Mode selected:", mode);
+            updateSelectedButton(modeButtons, mode);
             generateQuestion();
         });
     });
 
-    // ✅ FIXED: Operation Selection Buttons
+    // Operation Selection Buttons
     operationButtons.forEach(button => {
         button.addEventListener("click", () => {
             operation = button.getAttribute("data-operation");
-            console.log("Operation selected:", operation);
+            updateSelectedButton(operationButtons, operation);
             generateQuestion();
         });
     });
+
+    // Initialize selected buttons
+    updateSelectedButton(modeButtons, mode);
+    updateSelectedButton(operationButtons, operation);
 
     // Start with an initial question
     generateQuestion();
