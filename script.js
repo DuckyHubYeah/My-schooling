@@ -95,33 +95,39 @@ document.addEventListener("DOMContentLoaded", () => {
         let shuffledAnswers = [...answers].sort(() => Math.random() - 0.5);
         answerButtons.forEach((button, index) => {
             button.textContent = shuffledAnswers[index];
-            button.onclick = () => checkAnswer(parseInt(button.textContent));
+            button.onclick = () => checkAnswer(parseInt(button.textContent), button);
+            button.classList.remove("disabled"); // Enable buttons again for a new question
         });
+
+        messageElement.textContent = ""; // Clear message when a new question is generated
     }
 
-    function checkAnswer(selectedAnswer) {
+    function checkAnswer(selectedAnswer, button) {
         if (selectedAnswer === currentAnswer) {
             messageElement.textContent = "Correct!";
             messageElement.className = "correct";
+            setTimeout(generateQuestion, 1000); // Generate a new question only if the answer is correct
         } else {
             messageElement.textContent = "Wrong! Try again.";
             messageElement.className = "wrong";
+            button.classList.add("disabled"); // Disable the incorrect answer
         }
-        setTimeout(generateQuestion, 1000); // Generate a new question after a second
     }
 
     // Mode Selection Buttons
     modeButtons.forEach(button => {
         button.addEventListener("click", () => {
             mode = button.getAttribute("data-mode");
+            console.log("Mode selected:", mode);
             generateQuestion();
         });
     });
 
-    // Operation Selection Buttons
+    // ✅ FIXED: Operation Selection Buttons
     operationButtons.forEach(button => {
         button.addEventListener("click", () => {
             operation = button.getAttribute("data-operation");
+            console.log("Operation selected:", operation);
             generateQuestion();
         });
     });
