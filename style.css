@@ -6,59 +6,53 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
     min-height: 100vh;
-    gap: 20px;
 }
 
-/* Left & Right Panels */
-.left-panel, .right-panel {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-/* Game Container */
+/* Container for the Game */
 .container {
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     text-align: center;
     width: 80%;
     max-width: 500px;
+    margin: 20px auto;
 }
 
 /* Heading */
 h1 {
     font-size: 2.5em;
-    color: #61dafb;
+    color: #61dafb; /* Light Blue */
 }
 
-/* Mode & Operation Buttons */
+/* Mode Selection (Left-Aligned) */
+#mode-selection {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+}
+
 .mode-button, .operation-button {
-    background: #2196f3;
+    background: #2196f3; /* Blue */
     border: none;
     color: white;
-    font-size: 1.2em;
-    padding: 10px 20px;
+    font-size: 1.5em;
+    margin: 10px 0;
+    padding: 15px 30px;
     border-radius: 10px;
     cursor: pointer;
     transition: background 0.3s;
     width: 150px;
-    text-align: center;
 }
 
-.mode-button:hover, .operation-button:hover {
+.mode-button:hover {
     background: #1976d2;
-}
-
-/* Highlight Selected Mode & Operation */
-.selected {
-    background: #ff9800 !important; /* Orange color for selected buttons */
-    color: #000; /* Black text for contrast */
-    font-weight: bold;
 }
 
 /* Question */
@@ -67,33 +61,29 @@ h1 {
     margin: 20px 0;
 }
 
-/* Answer Buttons */
+/* Answer Buttons (Larger) */
 .button-container {
     display: flex;
     justify-content: center;
-    gap: 10px;
     margin: 10px 0;
 }
 
 .answer-button {
-    background: #ff9800;
+    background: #ff9800; /* Orange */
     border: none;
     color: white;
-    font-size: 1.5em;
-    padding: 15px 30px;
+    font-size: 2em;
+    margin: 10px;
+    padding: 25px 40px;
     border-radius: 10px;
     cursor: pointer;
     transition: background 0.3s;
-    width: 120px;
+    width: 180px;
+    display: block; /* Ensures buttons take full width */
 }
 
 .answer-button:hover {
     background: #e68900;
-}
-
-.answer-button.disabled {
-    background: #555; /* Grey out incorrect answers */
-    cursor: not-allowed;
 }
 
 /* Message */
@@ -105,9 +95,20 @@ h1 {
 
 /* Correct and Wrong Answer Colors */
 .correct {
-    color: #4CAF50;
+    color: #4CAF50; /* Green */
 }
 
 .wrong {
-    color: #FF5252;
+    color: #FF5252; /* Red */
+}
+
+.left-panel {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: center; /* Center-align buttons */
+    gap: 10px; /* Add spacing between buttons */
 }
