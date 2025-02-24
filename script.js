@@ -23,12 +23,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 num2 = getRandomInt(1, 10);
                 break;
             case "medium":
-                num1 = getRandomInt(5, 8);
-                num2 = getRandomInt(1, 15);
+                num1 = getRandomInt(5, 10);
+                num2 = getRandomInt(3, 15);
                 break;
             case "hard":
-                num1 = getRandomInt(9, 12);
-                num2 = getRandomInt(1, 20);
+                num1 = getRandomInt(11, 20);
+                num2 = getRandomInt(6, 20);
                 break;
             case "all":
             default:
