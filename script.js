@@ -1,102 +1,78 @@
-/* General Styling */
-body {
-    background: linear-gradient(135deg, #4b6cb7, #182848); /* Blue Gradient */
-    font-family: 'Arial', sans-serif;
-    color: #fff;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: flex-start;
-    min-height: 100vh;
-}
+document.addEventListener("DOMContentLoaded", () => {
+    const questionElement = document.getElementById("question");
+    const messageElement = document.getElementById("message");
+    const answerButtons = document.querySelectorAll(".answer-button");
+    const modeButtons = document.querySelectorAll(".mode-button");
 
-/* Container for the Game */
-.container {
-    background: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    width: 80%;
-    max-width: 500px;
-    margin: 20px auto;
-}
+    let currentAnswer = 0;
+    let mode = "easy"; // Default mode
 
-/* Heading */
-h1 {
-    font-size: 2.5em;
-    color: #61dafb; /* Light Blue */
-}
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 
-/* Mode Selection (Left-Aligned) */
-#mode-selection {
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-}
+    function generateQuestion() {
+        let multiplicand, multiplier;
+        
+        switch (mode) {
+            case "easy":
+                multiplicand = getRandomInt(1, 4);
+                break;
+            case "medium":
+                multiplicand = getRandomInt(5, 8);
+                break;
+            case "hard":
+                multiplicand = getRandomInt(9, 12);
+                break;
+            case "all":
+            default:
+                multiplicand = getRandomInt(1, 12);
+                break;
+        }
 
-.mode-button {
-    background: #2196f3; /* Blue */
-    border: none;
-    color: white;
-    font-size: 1.5em;
-    margin: 10px 0;
-    padding: 15px 30px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background 0.3s;
-    width: 150px;
-}
+        multiplier = getRandomInt(1, 12);
+        currentAnswer = multiplicand * multiplier;
+        
+        questionElement.textContent = `${multiplicand} × ${multiplier} = ?`;
 
-.mode-button:hover {
-    background: #1976d2;
-}
+        // Generate four answer choices
+        let answers = new Set();
+        answers.add(currentAnswer);
 
-/* Question */
-#question {
-    font-size: 2em;
-    margin: 20px 0;
-}
+        while (answers.size < 4) {
+            let fakeAnswer = getRandomInt(1, 144); // Ensure the range covers all possible products
+            if (fakeAnswer !== currentAnswer) {
+                answers.add(fakeAnswer);
+            }
+        }
 
-/* Answer Buttons (Larger) */
-.button-container {
-    display: flex;
-    justify-content: center;
-    margin: 10px 0;
-}
+        // Shuffle and set button values
+        let shuffledAnswers = [...answers].sort(() => Math.random() - 0.5);
+        answerButtons.forEach((button, index) => {
+            button.textContent = shuffledAnswers[index];
+            button.onclick = () => checkAnswer(parseInt(button.textContent));
+        });
+    }
 
-.answer-button {
-    background: #ff9800; /* Orange */
-    border: none;
-    color: white;
-    font-size: 2em;
-    margin: 10px;
-    padding: 25px 40px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background 0.3s;
-    width: 180px;
-}
+    function checkAnswer(selectedAnswer) {
+        if (selectedAnswer === currentAnswer) {
+            messageElement.textContent = "Correct!";
+            messageElement.className = "correct";
+        } else {
+            messageElement.textContent = "Wrong! Try again.";
+            messageElement.className = "wrong";
+        }
+        setTimeout(generateQuestion, 1000); // Generate a new question after a second
+    }
 
-.answer-button:hover {
-    background: #e68900;
-}
+    // Mode Selection
+    modeButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            mode = button.getAttribute("data-mode");
+            generateQuestion();
+        });
+    });
 
-/* Message */
-#message {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin: 20px;
-}
-
-/* Correct and Wrong Answer Colors */
-.correct {
-    color: #4CAF50; /* Green */
-}
-
-.wrong {
-    color: #FF5252; /* Red */
-}
+    // Start with a question
+    generateQuestion();
+});
