@@ -3,36 +3,56 @@ body {
     text-align: center;
     margin: 50px;
     background-color: #b3e5fc;
-    display: flex;
-    justify-content: space-between;
 }
 
 .container {
-    flex: 1;
     text-align: center;
 }
 
 .button-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
-.answer-button, .mode-button, .operation-button {
+.answer-button {
+    display: inline-block;
     margin: 10px;
     padding: 15px;
     font-size: 18px;
     cursor: pointer;
-    width: 150px;
+    width: 120px;
     background: #ff9800;
     border: none;
     border-radius: 10px;
     color: white;
 }
 
-.answer-button:hover, .mode-button:hover, .operation-button:hover {
+.answer-button:hover {
     background: #f57c00;
+}
+
+.mode-button, .operation-button {
+    display: block;
+    margin: 10px auto;
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 140px;
+    background: #4caf50;
+    border: none;
+    border-radius: 8px;
+    color: white;
+}
+
+.mode-button:hover, .operation-button:hover {
+    background: #388e3c;
+}
+
+#question {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
 #message {
@@ -43,18 +63,3 @@ body {
 
 .correct { color: green; }
 .wrong { color: red; }
-
-.left-panel, .right-panel {
-    width: 150px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.right-panel {
-    margin-right: 20px;
-}
-
-.left-panel {
-    margin-left: 20px;
-}
